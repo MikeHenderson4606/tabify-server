@@ -37,10 +37,11 @@ def index(request):
     # return HttpResponse(200)
 
 def queryTabs(request):
+    print(request.GET)
     baseURL = 'https://www.ultimate-guitar.com/search.php?'
-    value = request.GET.get('tabProp[value]')
-    searchType = request.GET.get('tabProp[searchType]')
-    page = request.GET.get('tabProp[page]')
+    value = request.GET.get('value')
+    searchType = request.GET.get('search_type')
+    page = request.GET.get('page')
 
     formattedURL = baseURL + 'page=' + page + '&search_type=' + searchType + '&value=' + value
     response = requests.get(formattedURL)
@@ -51,7 +52,8 @@ def queryTabs(request):
         try:
             elem['marketing_type']
         except:
-            removedProTabs.append(elem)
+            if (elem['type'] != 'Pro'):
+                removedProTabs.append(elem)
     return HttpResponse(json.dumps(removedProTabs))
 
 def _getQueryResults(html):
