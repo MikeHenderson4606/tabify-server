@@ -87,7 +87,6 @@ def getTabInfo(request):
     response = requests.get(tabURL)
     html = response.text
     raw_data = _getHTMLTabData(html)
-    print(json.dumps(raw_data))
     return HttpResponse(json.dumps(raw_data))
 
 def _getHTMLTabData(html):
