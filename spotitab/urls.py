@@ -6,7 +6,8 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("setCodeVerifier/<str:codeVerifier>", views.setCodeVerifier, name="setCodeVerifier"),
     path("spcallback", views.spCallback, name="callback"),
-    path("username", views.getUsername, name="username")
+    path("username", views.getUsername, name="username"),
+    path("querySongs", views.querySongs, name="querySongs")
 ]
 
 

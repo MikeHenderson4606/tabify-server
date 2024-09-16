@@ -15,7 +15,7 @@ def setCodeVerifier(request, codeVerifier):
 def spCallback(request):
     code = request.GET.get('code')
     codeVerifier = request.session['codeVerifier']
-    redirect_uri = 'http://localhost:8000/api/spcallback'
+    redirect_uri = 'http://localhost:8000/sp/spcallback'
 
     payload = {
         'client_id': '9105a9e75db44212b7ec076f5763c85e',
@@ -37,7 +37,7 @@ def spCallback(request):
 
         request.session['accessToken'] = data['access_token']
         storeUserInfo(request, data['access_token'])
-        return redirect('http://localhost:4200/view')
+        return redirect('http://localhost:4200/search')
     except:
         return redirect('http://localhost:4200')
     
@@ -56,5 +56,18 @@ def getUsername(request):
     print(userData)
 
     return HttpResponse(userData['display_name'])
+
+def querySongs(request):
+    access_token = request.session['accessToken']
+    songName = request.GET.get('songName')
+    queryType = request.GET.get('queryType')
+    headers = {
+        'Authorization': 'Bearer ' + access_token
+    }
+    print(url, access_token)
+
+    response = requests.get(url, headers = headers)
+    print(response.text)
+    return HttpResponse(response)
     
     

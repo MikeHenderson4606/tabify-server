@@ -85,6 +85,14 @@ CORS_ALLOW_CREDENTIALS = True
 
 WSGI_APPLICATION = 'tabifyServer.wsgi.application'
 
+# Sessions
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Default: stores session data in the database.
+SESSION_COOKIE_SECURE = False  # Ensure this is False if you're working in a development environment without HTTPS.
+SESSION_COOKIE_HTTPONLY = True  # Prevent JavaScript access to session cookie (recommended).
+SESSION_COOKIE_AGE = 1209600  # Session cookie age in seconds (2 weeks by default).
+SESSION_COOKIE_DOMAIN = None
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Set to True if you want the session to expire when the user closes their browser.
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
